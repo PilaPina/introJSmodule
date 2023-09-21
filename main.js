@@ -11,6 +11,9 @@ const startButton = document.querySelector('#startButton');
 // and finally we store out stop button in a variable called stopButton
 const stopButton = document.querySelector('#stopButton');
 // now we have three HTML elements ready to use in our JavaScript code
+const resetButton = document.querySelector("#resetButton");
+
+
 
 // in this example we want to animate something and we want to be able to stop the animation as well
 // in that case we need to use a variable to store the animation id (so that we can stop it later)
@@ -30,7 +33,8 @@ function animate() { // everything between the curly brackets {} is the code tha
   let left = parseInt(getComputedStyle(box).getPropertyValue('left'));
 
 
-  // since we don't want the box to move outside the screen we need to check if the top and left values are less than 450 before we add 5 to them
+  //This is a conditional: 
+  //since we don't want the box to move outside the screen we need to check if the top and left values are less than 450 before we add 5 to them
   if (top < 450) top += 5;
   if (left < 450) left += 5;
 
@@ -53,10 +57,49 @@ startButton.addEventListener('click', () => {
   animationId = requestAnimationFrame(animate);
 });
 
+
 // when the stop button is clicked we need to stop the animation
 stopButton.addEventListener('click', () => {
   cancelAnimationFrame(animationId);
 });
+ 
+// I created a reset button 
+resetButton.addEventListener("click", () => {
+  box.style.top = `0px`;
+  box.style.left = `0px`;
+})
+
+// Tried figuring out how to change background color of the box each time the reset button is pushed. 
+// I figured it out but only by using "onclick" in the html but Smari had mentioned that we should not do that. 
+// I'd love feedback about how to do this properly.  
+ function changeBackgroundColor() {
+//  Get the element with the id "box"
+const box = document.getElementById("box");
+
+ // Generate a random color
+ const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+//   // Set the background color of the box to the random color
+box.style.backgroundColor = randomColor;
+}
+
+
+// resetButton.addEventListener("click",() => {
+//   changeBackgroundColor();
+// })
+
+// Here I was trying to figure out how to change the color when a button is pushed
+// function changeBackgroundColor() P{
+//   let element = document.getElementById("#box");
+//   let colors = ["red", "green", "blue", "purple"];
+//   let randomColor = colors[Math.floor(Math.random() * colors.length)];
+//   element.style.backgroundColor = randomColor;
+// }
+// let button = document.getElementById(("#box");
+// button.addEventListener("click", changeBackgroundColor);
+
+
+
 
 // in our code we have decleared varables using both const and let
 // we use numbers in our top and left variables, the brown texts are called strings
